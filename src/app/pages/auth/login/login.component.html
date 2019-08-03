@@ -1,0 +1,77 @@
+<div class="background"></div>
+<div class="container" style="margin-bottom: 20px">
+  <div class="container">
+    <div >
+      <app-header></app-header>
+    </div>
+   <div class="row">
+     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+       <div class="card">
+         <div class="card-header">
+            <h4>Login</h4>
+            <div class="socials">
+                <a mat-mini-fab style="background-color: #55acee;"><i class="fa fa-twitter"></i></a>
+                <a mat-mini-fab style="background-color: #ea4c89; margin: 0 5px;"><i class="fa fa-dribbble"></i></a>
+                <a mat-mini-fab style="background-color: #3b5998;"><i class="fa fa-facebook"></i></a>
+              </div>
+         </div>
+         <div class="s-login-pg-foot">
+          <div *ngIf="errMsg" style="color:indianred; font-weight: bold">{{errMsg}}</div>
+      </div>
+
+         <form 
+         (ngSubmit)="Login(loginForm.value)" 
+         [formGroup]="loginForm" autocomplete="off" novalidate  fxLayout="column wrap"
+           fxLayoutAlign="center center" fxLayoutGap="10px">
+
+         <div class="card-form">
+          
+           <div class="form-row">
+             <!-- <i class="material-icons">email</i> -->
+             <mat-form-field color="accent">
+               <input type="email" matInput placeholder="Email address"formControlName="email" [(ngModel)]="email" id="email" name="email"/>
+             </mat-form-field>
+           </div>
+           <div class="form-row">
+             <!-- <i class="material-icons">lock_outline</i> -->
+             <mat-form-field color="accent">
+               <input type="password" matInput placeholder="Password" formControlName="password"[(ngModel)]="password" name="password" />
+             </mat-form-field>
+           </div>
+         </div>
+         <div class="card-footer row"  >
+         <div >
+           <div style="margin: 10px">
+              <button mat-raised-button  class="btn btn-rose btn-round"  type="submit" [disabled]="btnDisabled" >   <i class="material-icons">lock</i> 
+                Login
+              </button> 
+           </div>
+            
+
+               <div style="margin: 10px">
+                 <a routerLink="/forgetpassword"><i class="material-icons"></i>
+                  Unlock account
+                </a>
+              </div>
+
+               <div style="margin: 10px"  fxHide.gt-xs >
+                 <a  routerLink="/signup"><i class="material-icons"></i>
+                  Create account
+                </a>
+               </div>
+                
+
+
+            </div>
+          
+           
+       
+            
+
+           </div>
+          </form>
+      </div>
+     </div>
+   </div>
+  </div>
+</div>

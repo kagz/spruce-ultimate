@@ -1,0 +1,84 @@
+<div class="container">
+    <app-navbar title="User Profile"></app-navbar>
+    <div class="row" style="margin-top: 30px" fxLayoutAlign="center ">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+            <i class="material-icons">perm_identity</i>
+
+          </div>
+         
+             <div class="right-profile">
+              <div class="profile">
+                <img src="../../../assets/img/marc.jpg" alt="profile"/>
+              </div>
+             
+            </div>
+          <div class="card-content;col-sd-12 " style="padding: 50px">
+            <h5 class="card-title" style="margin-top: 10px">New Client
+             
+            </h5>
+
+            <form  [formGroup]="newCompanyForm" autocomplete="off" novalidate (ngSubmit)="addCompany(newCompanyForm.value)" fxLayout="column wrap"
+            fxLayoutAlign="center center" fxLayoutGap="10px">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field color="accent">
+                      <input matInput type="text" placeholder="Client's name" formControlName="name" id="name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field color="accent">
+                      <input matInput type="text" placeholder="Phone" formControlName="phone">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field color="accent">
+                      <input matInput type="email" placeholder="Client's Email" formControlName="email">
+                  </mat-form-field>
+                </div>
+  <div class="col-md-6">
+                  <mat-form-field color="accent">
+                      <mat-select placeholder="Location" formControlName="clientLocation">
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                        </mat-select>
+                 
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Upload Logo</label>
+                        <input type="file" class="form-control-file" accept="image/*" name="file" (change)="fileChange($event)">
+                      </div>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field color="accent">
+                      <textarea matInput type="text" placeholder="Jobs type description" formControlName="jobdesc"></textarea>
+                      </mat-form-field>
+                </div>
+            
+              </div>
+            
+              <div class="row " >
+                 <div style="padding: 10px" >
+                 <button mat-raised-button color="primary" [disabled]="!newCompanyForm.valid">Create</button>
+
+                 </div>
+                 <div style="padding: 10px">
+                  <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+
+                 </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 

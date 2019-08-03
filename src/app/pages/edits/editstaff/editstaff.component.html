@@ -1,0 +1,94 @@
+<div class="container">
+        <app-navbar title="User Profile"></app-navbar>
+        <div class="row" style="margin-top: 30px" fxLayoutAlign="center ">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <i class="material-icons">perm_identity</i>
+    
+              </div>
+             
+                 <div class="right-profile">
+                  <div class="profile">
+                    <img src="../../../assets/img/marc.jpg" alt="profile"/>
+                  </div>
+                 
+                </div>
+              <div class="card-content;col-sd-12 " style="padding: 50px">
+                <h4 class="card-title" style="margin-top: 20px">Edit Staff 
+                 
+                </h4>
+                <form  [formGroup]="ownerForm">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field color="accent">
+                        <input matInput type="text" placeholder=" Name"   name="firstName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field color="accent">
+                        <input matInput type="text" placeholder="Phone" name="phone">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field color="accent">
+                        <input matInput type="text" placeholder="Identiy / passport">
+                      </mat-form-field>
+                    </div>
+      <div class="col-md-6">
+                      <mat-form-field color="accent">
+                        <input matInput type="email" placeholder="Email">
+                      </mat-form-field>
+                    </div>
+    
+                  </div>
+                  <div class="row">
+                  
+                   
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Upload Image</label>
+                            <input type="file" class="form-control-file" accept="image/*" name="file" (change)="fileChange($event)">
+                          </div>
+                    </div>
+
+   <div class="col-md-3">
+                        <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="checkbox" name="isUser" class="form-check-input" > Make User
+                                </label>
+                              </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="checkbox" name="isAdmin" class="form-check-input" > Make Admin
+                              </label>
+                            </div>
+                </div>
+                  </div>
+               
+                  <div class="row" style="margin-top: 30px" fxLayoutAlign="center " >
+
+                
+                  <div class="row action-btn" style="padding-right: 50px">
+                    <button md-raised-button type="submit" class="btn btn-info">UPDATE </button>
+                  </div>
+                  <div class="row action-btn" style="padding-right: 50px">
+                        <button md-raised-button type="submit" class="btn btn-rose">DISABLE </button>
+                      </div>
+                  <div class="row action-btn" style="padding-right: 50px">
+                        <button md-raised-button type="submit" class="btn btn-danger">DELETE </button>
+                      </div>
+                    </div>
+                    </form>
+              </div>
+            </div>
+          </div>
+     
+        </div>
+      </div>
+      
+    
