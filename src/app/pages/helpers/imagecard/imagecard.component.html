@@ -8,10 +8,10 @@
         ><i class="material-icons">location_on</i> {{ place }}</div></h4>
       <p>{{ desc }}</p>
     </div>
-    <div class="footer">
-      <h4>{{ footerTitle }}</h4>
-      
-      <button md-raised-button type="submit" class="btn btn-info">PICK </button>
+    <div class="footer" style="padding: 10px">
+      <h4><i class="material-icons">group</i>{{ footerTitle }}</h4>
+      <button md-raised-button type="submit" class="btn btn-primary btn-xs" routerLink="/dashboard/editjob/1" >Edit Job </button>
+      <button md-raised-button type="submit" class="btn btn-info btn-xs">Pic Job</button>
 
     </div>
   </div>

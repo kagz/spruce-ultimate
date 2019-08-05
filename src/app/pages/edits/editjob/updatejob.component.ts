@@ -7,30 +7,26 @@ import { Location } from '@angular/common';
   styleUrls: ['./updatejob.component.css']
 })
 export class UpdatejobComponent implements OnInit {
-
-
-  public ownerForm: FormGroup;
- 
-
-  constructor(private location: Location) { }
+  public newJobsForm: FormGroup;
+  jobname = '';
+  companyname='';
+  dateOfStart = '';
+  staffs = '';
+  
+  constructor() { }
 
   ngOnInit() {
-    this.ownerForm = new FormGroup({
-      jobname: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      dateOfStart: new FormControl(new Date()),
-     
-      staffs: new FormControl('', [Validators.required, Validators.maxLength(100)])
-      ,
-      companyname: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      location: new FormControl('', [Validators.required, Validators.maxLength(100)])
-    });
+    this.newJobsForm = new FormGroup({
+      jobname: new FormControl('', [Validators.required]),
+ 
+       companyname: new FormControl('', [Validators.required])
+       ,
+       dateOfStart: new FormControl('', [Validators.required])
+       ,
+       staffs: new FormControl('5', [Validators.required]),
+      
+     });
   }
-
-  public hasError = (controlName: string, errorName: string) => {
-    return this.ownerForm.controls[controlName].hasError(errorName);
-  }
-
-  public onCancel = () => {
-    this.location.back();
-  }
+  ngAfterViewInit() {
+}
 }
