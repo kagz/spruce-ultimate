@@ -1,5 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CreateCompany } from 'app/pages/model/createcompany.model';
+import { CreateCompanyService } from 'app/services/createcompany.service';
+
 declare const $: any;
 @Component({
   selector: 'app-addcompanies',
@@ -7,26 +11,34 @@ declare const $: any;
   styleUrls: ['./addcompanies.component.css']
 })
 export class AddcompaniesComponent implements  OnInit, AfterViewInit {
-  public newCompanyForm: FormGroup;
-  email = '';
-  name='';
-  jobdesc = '';
-  phone = '';
-  clientLocation = '';
-  constructor() { }
-
-  ngOnInit() {
-    this.newCompanyForm = new FormGroup({
-      name: new FormControl('kamagera', [Validators.required, Validators.maxLength(60)]),
  
-       jobdesc: new FormControl('wizi na upinji', [Validators.required, Validators.maxLength(100)])
-       ,
-       phone: new FormControl('0721284155', [Validators.required, Validators.maxLength(100)])
-       ,
-       email: new FormControl('kamagera@gmail.com', [Validators.required, Validators.maxLength(100)]),
-       clientLocation: new FormControl('', [Validators.required, Validators.maxLength(100)])
-     });
+  newCompany: CreateCompany;
+ 
+  errors: any[] = [];
+ 
+ 
+ 
+  ngAfterViewInit(): void {
+  
   }
-  ngAfterViewInit() {
-}
+
+
+  
+  constructor(private router: Router,private companyService :CreateCompanyService
+
+  ) { }
+
+   ngOnInit() {
+    this.newCompany = new CreateCompany();
+  }
+  createCompany() {
+    this.companyService.createCompany(this.newCompany).subscribe(
+      () => {
+        this.router.navigate(["dashboard"]);
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.errors = errorResponse.error.errors;
+      })
+  }
+
 }

@@ -1,15 +1,14 @@
-export interface CreateCompany{
+import { Customer } from "./customer.model";
 
-   
+export class CreateCompany{
 
-    //_id: string;
+    _id: string;
     name: string;
-   // joinDate: Date;
     phone: string;
     email: string;
     clientLocation: string;
     jobdesc: string;
-
-
+    customer:Customer[];
+	image: string;
 
 }

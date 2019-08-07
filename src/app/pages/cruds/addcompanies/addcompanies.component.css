@@ -103,6 +103,12 @@ textarea{
   padding-right: 15px;
 }
 
-mat-form-field{
+input{
   width: 100%;
 }
+
+
+/* .example-full-width {
+  width: 90%;
+  /* padding-left: 30%; */
+  /* height: 10px; */

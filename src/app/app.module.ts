@@ -24,7 +24,7 @@ import { ToastService } from './services/toast.service';
 import { Logger } from './services/logger.service';
 import { SettingsService } from './services/settings.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
 import { AppConfig } from 'app-config';
@@ -39,7 +39,7 @@ import { UpdatejobComponent } from './pages/edits/editjob/updatejob.component';
 
 import { FigurecardComponent } from './pages/helpers/figurecard/figurecard.component';
 import { ImagecardComponent } from './pages/helpers/imagecard/imagecard.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ViewClients } from './pages/views/viewclients/viewclients.component';
 import { ProfileComponent } from './pages/edits/editprofile/profile.component';
 import { EditcompanyComponent } from './pages/edits/editcompany/editcompany.component';
@@ -50,11 +50,15 @@ import { ViewPostedJobsComponent } from './pages/views/viewpostedjobs/viewposted
 import { AddjobsComponent } from './pages/cruds/addjobs/addjobs.component';
 import { AddstaffComponent } from './pages/cruds/addstaff/addstaff.component';
 import { AddcompaniesComponent } from './pages/cruds/addcompanies/addcompanies.component';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DataService } from './services/data.service';
+import { ImageUploadComponent } from './pages/helpers/image-upload/image-upload.component';
+import { ImageUploadService } from './services/image-upload.service';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 @NgModule({  
   declarations: [
@@ -87,11 +91,13 @@ import { HeaderComponent } from './components/header/header.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ImageUploadComponent
 
   ], 
   
   imports: [
+
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -102,7 +108,9 @@ import { HeaderComponent } from './components/header/header.component';
     HttpClientModule
     , ReactiveFormsModule,
     FormsModule,
- 
+    NgbModule,
+    ImageCropperModule,
+    ToastrModule.forRoot()
   ],
   providers: [
    [ SettingsService,
@@ -116,7 +124,10 @@ import { HeaderComponent } from './components/header/header.component';
     RegisterService,
     ForgetPasswordService,
     CreateCompanyService,
-    CustomerService
+    CustomerService,
+    DataService,
+    ImageUploadService,
+    
   ],
    {provide: LocationStrategy, useClass: HashLocationStrategy},
 ],
