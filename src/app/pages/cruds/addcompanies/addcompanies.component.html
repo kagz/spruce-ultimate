@@ -19,41 +19,77 @@
              
             </h5>
 
-            <form  autocomplete="off" novalidate  fxLayout="column wrap"
-            fxLayoutAlign="center center" fxLayoutGap="10px">
+            <form 
+            #companyForm="ngForm"
+             autocomplete="off"
+              novalidate 
+               fxLayout="column wrap"
+            fxLayoutAlign="center center"
+             fxLayoutGap="10px">
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <input matInput type="text" placeholder="Client's name"  id="name">
+                      <input 
+                      matInput
+                       type="text" 
+                       placeholder="Client's name" 
+                        id="name"
+                        name="name"
+                        [(ngModel)]="newCompany.name"
+                        >
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <input matInput type="text" placeholder="Phone" >
+                      <input 
+                      matInput 
+                      type="text" 
+                      placeholder="Phone"
+                      name="phone"
+                      [(ngModel)]="newCompany.phone"
+                      
+                      
+                      >
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <input matInput type="email" placeholder="Client's Email" >
+                      <input
+                       matInput 
+                       type="email"
+                        placeholder="Client's Email"
+                        
+                        name="email"
+                        [(ngModel)]="newCompany.email"
+                        
+                        >
                   </mat-form-field>
                 </div>
   <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <mat-select placeholder="Location">
+                      <mat-select 
+                      placeholder="Location"
+                      name="clientLocation"
+                      [(ngModel)]="newCompany.clientLocation"
+                      
+                      >
                           <mat-option>None</mat-option>
-                          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+                          <mat-option 
+                          *ngFor="let state of states"
+                           [value]="state.name">{{state.name}}</mat-option>
                         </mat-select>
                  
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="form-group">
 
-                      <spruce-image-upload (imageUploaded)="handleImageUpload($event)"
+                      <spruce-image-upload 
+                      (imageUploaded)="handleImageUpload($event)"
                       (imageError)="handleImageError()">
     </spruce-image-upload>
 
@@ -61,17 +97,43 @@
 
                     </div>
                 </div>
-                <div class="col-md-6">
-                  <mat-form-field color="accent">
-                      <textarea matInput type="text" placeholder="Jobs type description"></textarea>
-                      </mat-form-field>
-                </div>
+               
             
               </div>
             
+
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field color="accent">
+        <textarea 
+        matInput
+         type="text" 
+         placeholder="Jobs type description"
+         name="jobdesc"
+         [(ngModel)]="newCompany.jobdesc"
+          
+         ></textarea>
+        </mat-form-field>
+  </div>
+</div>
+
+
+
+
+
+
               <div class="row " >
                  <div style="padding: 5px" >
-                 <button mat-raised-button color="primary" >Create</button>
+                 <button
+                  mat-raised-button 
+                  color="primary" 
+                  
+                  (click)="addCompany()"
+                  [disabled]="!companyForm.form.valid "
+                  type="button"
+                  
+                  
+                  >Create</button>
 
                  </div>
                  <div style="padding: 5px">
@@ -81,6 +143,8 @@
               </div>
             </form>
           </div>
+     
+          <app-message></app-message>
         </div>
       </div>
  

@@ -13,8 +13,5 @@ export class CreateCompanyService {
     constructor(private apiRequest: ApiRequestService
       
     ) {}
-    public createCompany(company: CreateCompany): Observable<any> {
-        return this.apiRequest.post('company', company);
-      }
-  
+
 }

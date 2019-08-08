@@ -3,7 +3,6 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddcompaniesComponent } from './pages/cruds/addcompanies/addcompanies.component';
 import { AddjobsComponent } from './pages/cruds/addjobs/addjobs.component';

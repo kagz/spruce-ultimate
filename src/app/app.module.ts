@@ -59,6 +59,7 @@ import { DataService } from './services/data.service';
 import { ImageUploadComponent } from './pages/helpers/image-upload/image-upload.component';
 import { ImageUploadService } from './services/image-upload.service';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { MessageComponent } from './pages/helpers/message/message.component';
 
 @NgModule({  
   declarations: [
@@ -86,7 +87,7 @@ import { ToastrService, ToastrModule } from 'ngx-toastr';
     UpdatejobComponent,
     BookedJobsComponent,
     EditstaffComponent,
- 
+ MessageComponent,
     SuccessPageComponent,
     FooterComponent,
     NavbarComponent,

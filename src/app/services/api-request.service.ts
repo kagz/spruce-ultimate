@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpRequest,  HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable} from 'rxjs';
+import { Observable, throwError} from 'rxjs';
 import 'rxjs/add/operator/catch';
 import { AppConfig } from 'app-config';
 import { UserInfoService } from './user-info.service';
@@ -53,7 +53,7 @@ export class ApiRequestService {
             });
     }
 
-    put(url:string, body:Object):Observable<any>{
+    put(url:string, body:Object){
         let me = this;
         return this.http.put(this.appConfig.baseApiPath + url, JSON.stringify(body), { headers:this.getHeaders()})
             .catch(function(error:any){
