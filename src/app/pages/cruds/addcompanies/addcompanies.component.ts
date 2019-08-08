@@ -31,7 +31,7 @@ export class AddcompaniesComponent implements  OnInit {
   ) { }
 
    ngOnInit() {
-
+    this.newCompany = new CreateCompany();
   }
 
 
@@ -46,6 +46,9 @@ export class AddcompaniesComponent implements  OnInit {
   handleImageError() {
     this.newCompany.image = '';
   }
+
+
+
 
  addCompany() {
  
