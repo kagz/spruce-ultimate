@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'app/services/login.service';
+import { RestApiService } from 'app/services/auth.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -10,35 +11,46 @@ import { LoginService } from 'app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  email = '';
-  password = '';
-  errMsg="";
+  email = 'admin@admin.com';
+  password = '12345';
 
-  btnDisabled = false;
   constructor(
       private formBuilder: FormBuilder,
+      private data:DataService,
+      private auth: RestApiService,
       private router: Router,
-      private loginService: LoginService )
+    
+     )
        { }
    ngOnInit() {
       this.loginForm = this.formBuilder.group({
-          email: ['', Validators.required],
-          password: ['', Validators.required]
+          email: ['kagwiandrew@gmail.com', Validators.required],
+          password: ['ryan6969', Validators.required]
       });
-      this.loginService.logout(true);
+     
   }
-  async Login() {
-    this.btnDisabled = true;
-  	this.loginService.getToken(this.email, this.password).subscribe(
-  		async res => {
-      if (res.user === undefined || res.user.token === undefined || res.user.token === "INVALID" ){
-        this.errMsg = 'Username or password is incorrect';
-        return;
+   async Login() {
+    try {
+      if (this.loginForm) {
+        const data = await this.auth.post(
+          'http://localhost:3030/login',
+          {
+            email: this.email,
+            password: this.password,
+          },
+        );
+        if (data) {
+          localStorage.setItem('token', data['token']);
+       await this.data.getProfile();
+          this.router.navigate(['dashboard']);
+        } else {
+          this.data.error(data['message']);
+          console.log(data)
+        }
+      }
+    } catch (error) {
+      this.data.error(error['message']);
+      console.log(error)
     }
-    //await this.res.getProfile();
-        this.router.navigate(['dashboard'])
-     }
-    );
-    this.btnDisabled = false;
   }
 }

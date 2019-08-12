@@ -16,8 +16,9 @@
               </div>
          </div>
          <div class="s-login-pg-foot">
-          <div *ngIf="errMsg" style="color:indianred; font-weight: bold">{{errMsg}}</div>
-      </div>
+      
+     
+        </div>
 
          <form 
          (ngSubmit)="Login(loginForm.value)" 
@@ -69,6 +70,7 @@
 
            </div>
           </form>
+          <app-message></app-message>
       </div>
      </div>
    </div>

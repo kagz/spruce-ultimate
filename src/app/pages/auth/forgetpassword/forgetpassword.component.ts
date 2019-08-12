@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ForgetPasswordService } from 'app/services/forgetpassword.service';
+import { DataService } from 'app/services/data.service';
+import { RestApiService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-forgetpassword',
@@ -9,32 +10,41 @@ import { ForgetPasswordService } from 'app/services/forgetpassword.service';
   styleUrls: ['./forgetpassword.component.css']
 })
 export class ForgetpasswordComponent implements OnInit {
-  registerForm: FormGroup;
-  email = '';
-  succMsg='';
-  errMsg="";
+
+  email = 'kagwiandrew@gmail.com';
+
   constructor(
-      private formBuilder: FormBuilder,
-      private router: Router,
-      private loginService: ForgetPasswordService )
+    private router: Router,
+      private data: DataService,
+      private rest: RestApiService,
+  )
        { }
    ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-          email: ['', Validators.required],
-        
-      });
-     
   }
-  Register() {
-  	this.loginService.requestPass(this.email).subscribe(
-  		res => {
-      if (res.user === undefined || res.user.token === undefined || res.user.token === "INVALID" ){
-        this.errMsg = 'This Email Is Ivalid!!';
-        return;
-    }
-    this.succMsg = 'Check Your Email For New Password';
-        this.router.navigate(['forgetpassword'])
-     }
-  	);
+  async onForgetPassword() {
+ // this.btnDisabled = true;
+ try {
+     
+  const data = await this.rest.post(
+    'http://localhost:3030/forgot',
+    {
+   
+      email: this.email,
+  
+     
+    },
+  );
+  if (data) {
+   
+    this.data.success('Email sent  successful!');
+    this.router.navigate(['login']);
+  } else {
+    this.data.error('Wrong email address');
+  }
+
+} catch (error) {
+this.data.error(error['server error']);
+}
+// this.btnDisabled = false;
   }
 }

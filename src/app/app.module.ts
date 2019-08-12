@@ -12,22 +12,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { SuccessPageComponent } from './pages/helpers/success/success.component';
 import { ErrorComponent } from './pages/helpers/error/error.component';
-import { CustomerService } from './services/newjobs.service';
-import { CreateCompanyService } from './services/createcompany.service';
-import { ForgetPasswordService } from './services/forgetpassword.service';
-import { RegisterService } from './services/register.service';
-import { LoginService } from './services/login.service';
-import { ApiRequestService } from './services/api-request.service';
-import { UserInfoService } from './services/user-info.service';
-import { AuthGuard } from './services/auth-guard.service';
-import { ToastService } from './services/toast.service';
+
 import { Logger } from './services/logger.service';
 import { SettingsService } from './services/settings.service';
-import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatCardModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
-import { AppConfig } from 'app-config';
+
 import { ForgetpasswordComponent } from './pages/auth/forgetpassword/forgetpassword.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
@@ -55,11 +47,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { DataService } from './services/data.service';
-import { ImageUploadComponent } from './pages/helpers/image-upload/image-upload.component';
-import { ImageUploadService } from './services/image-upload.service';
+
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { MessageComponent } from './pages/helpers/message/message.component';
+
+import { AuthGuard } from './services/auth.guard';
+import { RestApiService } from './services/auth.service';
+import { DataService } from './services/data.service';
 
 @NgModule({  
   declarations: [
@@ -93,7 +87,7 @@ import { MessageComponent } from './pages/helpers/message/message.component';
     NavbarComponent,
     SidebarComponent,
     HeaderComponent,
-    ImageUploadComponent
+
 
   ], 
   
@@ -116,21 +110,17 @@ import { MessageComponent } from './pages/helpers/message/message.component';
   providers: [
    [ SettingsService,
     Logger,
-    ToastService,
+    RestApiService,
     AuthGuard,
-    UserInfoService,
-   AppConfig,
-    ApiRequestService,
-    LoginService,
-    RegisterService,
-    ForgetPasswordService,
-    CreateCompanyService,
-    CustomerService,
-    DataService,
-    ImageUploadService,
+    DataService
     
   ],
    {provide: LocationStrategy, useClass: HashLocationStrategy},
+  //  {
+  //   // provide: HTTP_INTERCEPTORS,
+  //   // // useClass: TokenInterceptor,
+  //   // multi: true
+  // }
 ],
 
 entryComponents: [

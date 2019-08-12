@@ -7,7 +7,7 @@ declare const $: any;
   styleUrls: ['./addjobs.component.css']
 })
 export class AddjobsComponent implements OnInit, AfterViewInit {
-  public newJobsForm: FormGroup;
+ 
   jobname = '';
   companyname='';
   dateOfStart = '';
@@ -16,16 +16,7 @@ export class AddjobsComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
-    this.newJobsForm = new FormGroup({
-      jobname: new FormControl('', [Validators.required]),
- 
-       companyname: new FormControl('', [Validators.required])
-       ,
-       dateOfStart: new FormControl('', [Validators.required])
-       ,
-       staffs: new FormControl('5', [Validators.required]),
-      
-     });
+
   }
   ngAfterViewInit() {
 }

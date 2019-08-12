@@ -19,17 +19,17 @@
              
             </h5>
 
-            <form  [formGroup]="newJobsForm" autocomplete="off" novalidate (ngSubmit)="addJobs(newJobsForm.value)" fxLayout="column wrap"
+            <form  autocomplete="off" novalidate fxLayout="column wrap"
             fxLayoutAlign="center center" fxLayoutGap="10px">
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <input  required matInput type="text" placeholder="Job Title" formControlName="jobname" id="jobname">
+                      <input  required matInput type="text" placeholder="Job Title" id="jobname">
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <mat-select placeholder="Client Name" formControlName="companyname" required>
+                      <mat-select placeholder="Client Name"  required>
                           <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">
                             
                           </mat-option>
@@ -41,12 +41,12 @@
                 <div class="col-md-6">
                   <mat-form-field color="accent">
                      
-            <input matInput type="datetime-local" placeholder="Start Date And Time" formControlName="dateOfStart" id="dateOfStart">
+            <input matInput type="datetime-local" placeholder="Start Date And Time"  id="dateOfStart">
                   </mat-form-field>
                 </div>
   <div class="col-md-6">
                   <mat-form-field color="accent">
-                      <input  required matInput type="number"  placeholder="Staffs Needed" formControlName="staffs">
+                      <input  required matInput type="number"  placeholder="Staffs Needed" >
                  
                   </mat-form-field>
                 </div>
@@ -55,7 +55,7 @@
             
               <div class="row " >
                  <div style="padding: 10px" >
-                 <button mat-raised-button color="primary" [disabled]="!newJobsForm.valid">Create</button>
+                 <button mat-raised-button color="primary">Create</button>
 
                  </div>
                  <div style="padding: 10px">

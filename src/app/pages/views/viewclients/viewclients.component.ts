@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { Staffs } from 'app/pages/model/staffs.model';
+
 import { Logger } from 'app/services/logger.service';
+import { DataService } from 'app/services/data.service';
+import { RestApiService } from 'app/services/auth.service';
+import { CreateCompany } from 'app/pages/model/createcompany.model';
 
 @Component({
   selector: 'app-viewclients',
@@ -10,7 +13,7 @@ import { Logger } from 'app/services/logger.service';
 })
 export class ViewClients implements OnInit {
   public displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
-  public dataSource = new MatTableDataSource<Staffs>(); 
+  public dataSource = new MatTableDataSource<CreateCompany>(); 
   screenHeight: any;
   screenWidth: any;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -23,7 +26,12 @@ export class ViewClients implements OnInit {
   this.setDisplayedColumns();
 }
 
-  constructor(private logger: Logger) { 
+ourclients: any;
+
+  constructor(
+    private logger: Logger,
+    private data: DataService,
+     private rest: RestApiService) { 
 
     this.screenHeight = window.screen.height;
     this.screenWidth = window.screen.width;
@@ -32,9 +40,25 @@ export class ViewClients implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    ///populate table
+    
+    try {
+      const data = await this.rest.get(
+        'http://localhost:3030/company/all'
+      );
+      data
+        ? (this.ourclients = data)
+        : this.data.error(data['message']);
+        console.log(data)
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+
+    //pagination
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.data=this.ourclients;
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

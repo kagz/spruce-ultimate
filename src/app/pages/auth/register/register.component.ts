@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterService } from 'app/services/register.service';
+import { DataService } from 'app/services/data.service';
+import { RestApiService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,46 +12,51 @@ import { RegisterService } from 'app/services/register.service';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
-  email = '';
-  name='';
+
+  email = 'kagwiandrew@gmail.com';
+  name='kamagera mwenyewe';
   password = '';
-  errMsg="";
+
   constructor(
-      private formBuilder: FormBuilder,
+     
+
       private router: Router,
-      private registerService: RegisterService,
+      private data: DataService,
+      private rest: RestApiService,
  
             )
 
        { }
  
   ngOnInit() {
-      this.registerForm = this.formBuilder.group({
-          email: ['', Validators.required],
-          password: ['', Validators.required],
-          name: ['', Validators.required]
-      });
-
-     // this.loginService.logout(true);
 
 
   }
-  Register() {
-  	this.registerService.newUser(this.email, this.password,this.name).subscribe(
-  		res => {
-      //	console.log(res);
-      
-      if (res.user === undefined || res.user.token === undefined || res.user.token === "INVALID" ){
-        this.errMsg = 'Email is Already Registered!!';
-        return;
-    }
-  			localStorage.setItem("xAuthToken", JSON.stringify(res));
-  			
-       
-      this.router.navigate(['dashboard'])
+  async onRegister() {
+   // this.btnDisabled = true;
+    try {
      
-  		}
-  	);
+        const data = await this.rest.post(
+          'http://localhost:3030/register',
+          {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+           
+          },
+        );
+        if (data) {
+          localStorage.setItem('token', data['token']);
+          await this.data.getProfile();
+          this.data.success('Registration successful!');
+          this.router.navigate(['dashboard']);
+        } else {
+          this.data.error(data['message']);
+        }
+  
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+   // this.btnDisabled = false;
   }
 }

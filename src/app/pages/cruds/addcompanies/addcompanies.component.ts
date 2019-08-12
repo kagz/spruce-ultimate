@@ -1,56 +1,71 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { CreateCompany } from 'app/pages/model/createcompany.model';
-import { CreateCompanyService } from 'app/services/createcompany.service';
+
 import { DataService } from 'app/services/data.service';
-import { first } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-declare const $: any;
+import { RestApiService } from 'app/services/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-addcompanies',
   templateUrl: './addcompanies.component.html',
   styleUrls: ['./addcompanies.component.css']
 })
 export class AddcompaniesComponent implements  OnInit {
+
+  cities : any
  
-  newCompany: CreateCompany;
-  states : any[] = [];
-  errors: any[] = [];
- 
- 
- 
+
+newCompany={
+  email : '',
+  name : '',
+  phone:'',
+clientlocation: '',
+jobdesc:'',
+
+};
   ngAfterViewInit(): void {
   
   }
 
-
-  
-  constructor(
+   constructor(
+    private data:DataService,
+    private auth: RestApiService,
+    private router: Router,
 
   ) { }
-
-   ngOnInit() {
-    this.newCompany = new CreateCompany();
+   async ngOnInit() {
+    this.cities = [];
+   
+    try {
+      const data = await this.auth.get(
+        'http://localhost:3030/cities/all'
+      );
+    
+      data
+        ? (this.cities = data)
+        : this.data.error(data['message']);
+    } catch (error) {
+      this.data.error(error['message']);
+    }
   }
 
 
-  handleImageChange() {
-    this.newCompany.image = "";
-  }
-
-  handleImageUpload(imageUrl: string) {
-    this.newCompany.image = imageUrl;
-  }
-
-  handleImageError() {
-    this.newCompany.image = '';
-  }
-
-
-
-
- addCompany() {
+ async addCompany() {
  
+    try {
+        const data = await this.auth.post(
+          'http://localhost:3030/company',
+       this.newCompany
+        );
+        data
+          ? this.router.navigate(['dashboard'])
+            .then(() => 
+            this.data.success(data['message']))
+            .catch(error => this.data.error(error))
+          : this.data.error(data['message']);
+     
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+
 }
 }

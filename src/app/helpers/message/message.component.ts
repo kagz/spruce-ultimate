@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'app/services/data.service';
 
 @Component({
   selector: 'app-message',
@@ -8,9 +7,7 @@ import { DataService } from 'app/services/data.service';
 })
 export class MessageComponent implements OnInit {
 
-  constructor(private data:DataService) { 
-    
-  }
+  constructor() { }
 
   ngOnInit() {
   }

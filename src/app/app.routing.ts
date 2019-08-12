@@ -19,14 +19,19 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgetpasswordComponent } from './pages/auth/forgetpassword/forgetpassword.component';
 import { NotFoundComponent } from './pages/helpers/not-found/not-found.component';
 import { ServerErrorComponent } from './pages/helpers/server-error/server-error.component';
+import { AuthGuard } from './services/auth.guard';
 
 
 
 const routes: Routes = [
  
  
-  { path: 'dashboard', component: AdminLayoutComponent , children: [
-
+  { path: 'dashboard',
+   component: AdminLayoutComponent , 
+   canActivate: [AuthGuard],
+  
+  children: [
+    
     {path: '', component: DashboardComponent},
     { path: 'addcompanies', component: AddcompaniesComponent },
   
