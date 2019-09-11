@@ -12,7 +12,7 @@ import { RestApiService } from 'app/services/auth.service';
 export class ForgetpasswordComponent implements OnInit {
 
   email = 'kagwiandrew@gmail.com';
-
+  errors: any[] = [];
   constructor(
     private router: Router,
       private data: DataService,
@@ -39,11 +39,13 @@ export class ForgetpasswordComponent implements OnInit {
     this.data.success('Email sent  successful!');
     this.router.navigate(['login']);
   } else {
-    this.data.error('Wrong email address');
+  //  this.data.error('Wrong email address');
+
   }
 
-} catch (error) {
-this.data.error(error['server error']);
+} catch (errorResponse) {
+// this.data.error(error['server error']);
+this.errors = errorResponse.error.errors;
 }
 // this.btnDisabled = false;
   }

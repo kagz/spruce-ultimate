@@ -70,7 +70,11 @@
 
            </div>
           </form>
-          <app-message></app-message>
+          <div *ngIf="errors.length > 0" class="alert alert-danger">
+            <p *ngFor="let error of errors">
+              {{error.detail}}
+            </p>
+          </div>
       </div>
      </div>
    </div>

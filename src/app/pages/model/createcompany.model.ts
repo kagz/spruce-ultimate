@@ -1,6 +1,6 @@
 import { Customer } from "./customer.model";
 
-export class CreateCompany{
+export class Company{
 
     _id: string;
     name: string;

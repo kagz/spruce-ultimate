@@ -4,7 +4,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Logger } from 'app/services/logger.service';
 import { DataService } from 'app/services/data.service';
 import { RestApiService } from 'app/services/auth.service';
-import { CreateCompany } from 'app/pages/model/createcompany.model';
+import { Company } from 'app/pages/model/createcompany.model';
 
 @Component({
   selector: 'app-viewclients',
@@ -13,7 +13,7 @@ import { CreateCompany } from 'app/pages/model/createcompany.model';
 })
 export class ViewClients implements OnInit {
   public displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
-  public dataSource = new MatTableDataSource<CreateCompany>(); 
+  public dataSource = new MatTableDataSource<Company>(); 
   screenHeight: any;
   screenWidth: any;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

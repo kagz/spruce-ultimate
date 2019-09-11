@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   email = 'kagwiandrew@gmail.com';
   name='kamagera mwenyewe';
   password = '';
-
+  errors:any[]= [];
   constructor(
      
 
@@ -51,11 +51,14 @@ export class RegisterComponent implements OnInit {
           this.data.success('Registration successful!');
           this.router.navigate(['dashboard']);
         } else {
-          this.data.error(data['message']);
+//this.data.error(data['message']);
         }
   
-    } catch (error) {
-      this.data.error(error['message']);
+    } catch (errorResponse) {
+     // this.data.error(error['message']);
+
+      this.errors = errorResponse.error.errors;
+
     }
    // this.btnDisabled = false;
   }

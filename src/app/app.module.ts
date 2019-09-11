@@ -51,9 +51,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { MessageComponent } from './pages/helpers/message/message.component';
 
+import { ImageUploadService } from './services/imageupload.service';
 import { AuthGuard } from './services/auth.guard';
 import { RestApiService } from './services/auth.service';
 import { DataService } from './services/data.service';
+import { ResetComponent } from './pages/auth/reset/reset.component';
+import { ImageuploadComponent } from './pages/helpers/imageupload/imageupload.component';
 
 @NgModule({  
   declarations: [
@@ -87,12 +90,14 @@ import { DataService } from './services/data.service';
     NavbarComponent,
     SidebarComponent,
     HeaderComponent,
+    ResetComponent,
+    ImageuploadComponent,
 
 
   ], 
   
   imports: [
-
+   
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -112,7 +117,8 @@ import { DataService } from './services/data.service';
     Logger,
     RestApiService,
     AuthGuard,
-    DataService
+    DataService,
+    ImageUploadService
     
   ],
    {provide: LocationStrategy, useClass: HashLocationStrategy},

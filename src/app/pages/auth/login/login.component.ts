@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   email = 'admin@admin.com';
   password = '12345';
-
+  errors : any[]=[];
   constructor(
       private formBuilder: FormBuilder,
       private data:DataService,
@@ -44,13 +44,13 @@ export class LoginComponent implements OnInit {
        await this.data.getProfile();
           this.router.navigate(['dashboard']);
         } else {
-          this.data.error(data['message']);
-          console.log(data)
+         // this.data.error(data['message']);
+        
         }
       }
-    } catch (error) {
-      this.data.error(error['message']);
-      console.log(error)
+    } catch (errorResponse) {
+     // this.data.error(error['message']);
+      this.errors = errorResponse.error.errors;
     }
   }
 }

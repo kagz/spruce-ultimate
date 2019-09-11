@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from 'app/services/data.service';
 import { RestApiService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
+import { Company } from 'app/pages/model/createcompany.model';
 
 @Component({
   selector: 'app-addcompanies',
@@ -13,17 +14,16 @@ export class AddcompaniesComponent implements  OnInit {
 
   cities : any
  
+  newCompany: Company;
 
-newCompany={
-  email : '',
-  name : '',
-  phone:'',
-clientlocation: '',
-jobdesc:'',
+  errors: any[] = [];
 
-};
   ngAfterViewInit(): void {
   
+  }
+
+  handleImageChange() {
+    this.newCompany.image = "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/13/image.jpeg";
   }
 
    constructor(
@@ -33,6 +33,8 @@ jobdesc:'',
 
   ) { }
    async ngOnInit() {
+    this.newCompany = new Company();
+
     this.cities = [];
    
     try {
@@ -48,24 +50,17 @@ jobdesc:'',
     }
   }
 
+  handleImageUpload(imageUrl: string) {
+    this.newCompany.image = imageUrl;
+  }
+
+  handleImageError() {
+    this.newCompany.image = '';
+  }
 
  async addCompany() {
  
-    try {
-        const data = await this.auth.post(
-          'http://localhost:3030/company',
-       this.newCompany
-        );
-        data
-          ? this.router.navigate(['dashboard'])
-            .then(() => 
-            this.data.success(data['message']))
-            .catch(error => this.data.error(error))
-          : this.data.error(data['message']);
-     
-    } catch (error) {
-      this.data.error(error['message']);
-    }
+   
 
 }
 }
