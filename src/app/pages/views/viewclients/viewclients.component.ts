@@ -3,8 +3,9 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
 import { Logger } from 'app/services/logger.service';
 import { DataService } from 'app/services/data.service';
-import { RestApiService } from 'app/services/auth.service';
+
 import { Company } from 'app/pages/model/createcompany.model';
+import { RestApiService } from 'app/services/rest-api.service';
 
 @Component({
   selector: 'app-viewclients',
@@ -13,25 +14,25 @@ import { Company } from 'app/pages/model/createcompany.model';
 })
 export class ViewClients implements OnInit {
   public displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
-  public dataSource = new MatTableDataSource<Company>(); 
+  public dataSource = new MatTableDataSource<Company>();
   screenHeight: any;
   screenWidth: any;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @HostListener('window:resize', ['$event'])
-  onResize(event?) {
-  this.screenHeight = window.innerHeight;
-  this.screenWidth = window.innerWidth;
- this.logger.log(`Resize() height: ${this.screenHeight}; width: ${this.screenWidth}`);
-  this.setDisplayedColumns();
-}
+  onResize (event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    this.logger.log(`Resize() height: ${this.screenHeight}; width: ${this.screenWidth}`);
+    this.setDisplayedColumns();
+  }
 
-ourclients: any;
+  ourclients: any;
 
   constructor(
     private logger: Logger,
     private data: DataService,
-     private rest: RestApiService) { 
+    private rest: RestApiService) {
 
     this.screenHeight = window.screen.height;
     this.screenWidth = window.screen.width;
@@ -40,9 +41,9 @@ ourclients: any;
 
   }
 
-  async ngOnInit() {
+  async ngOnInit () {
     ///populate table
-    
+
     try {
       const data = await this.rest.get(
         'http://localhost:3030/company/all'
@@ -50,7 +51,7 @@ ourclients: any;
       data
         ? (this.ourclients = data)
         : this.data.error(data['message']);
-        console.log(data)
+      console.log(data)
     } catch (error) {
       this.data.error(error['message']);
     }
@@ -58,19 +59,19 @@ ourclients: any;
     //pagination
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.data=this.ourclients;
+    this.dataSource.data = this.ourclients;
   }
-  applyFilter(filterValue: string) {
+  applyFilter (filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-}    setDisplayedColumns() {
-  if (this.screenWidth < 420) {
+  } setDisplayedColumns () {
+    if (this.screenWidth < 420) {
       this.displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
-  }
-  else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
+    }
+    else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
       this.displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
-  }
-  else {
+    }
+    else {
       this.displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
+    }
   }
-}
 }

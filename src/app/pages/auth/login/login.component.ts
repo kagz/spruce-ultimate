@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RestApiService } from 'app/services/auth.service';
+
 import { DataService } from '../../../services/data.service';
+import { RestApiService } from 'app/services/rest-api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,29 +12,43 @@ import { DataService } from '../../../services/data.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  email = 'admin@admin.com';
-  password = '12345';
-  errors : any[]=[];
+  email = 'kagwiandrew@gmail.com';
+  password = '123456';
+  errors: any[] = [];
+  btnDisabled = false;
   constructor(
-      private formBuilder: FormBuilder,
-      private data:DataService,
-      private auth: RestApiService,
-      private router: Router,
-    
-     )
-       { }
-   ngOnInit() {
-      this.loginForm = this.formBuilder.group({
-          email: ['kagwiandrew@gmail.com', Validators.required],
-          password: ['ryan6969', Validators.required]
-      });
-     
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private rest: RestApiService,
+    private data: DataService,
+
+  ) { }
+  ngOnInit () {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
   }
-   async Login() {
+  validate () {
+    if (this.email) {
+      if (this.password) {
+        return true;
+      } else {
+        this.data.error('Password is not entered');
+      }
+    } else {
+      this.data.error('Email is not entered.');
+    }
+  }
+  async Login () {
+
+
+    this.btnDisabled = true;
     try {
-      if (this.loginForm) {
-        const data = await this.auth.post(
-          'http://localhost:3030/login',
+      if (this.validate()) {
+        const data = await this.rest.post(
+          'https://sprucemvp-api.herokuapp.com/login',
           {
             email: this.email,
             password: this.password,
@@ -41,16 +56,16 @@ export class LoginComponent implements OnInit {
         );
         if (data) {
           localStorage.setItem('token', data['token']);
-       await this.data.getProfile();
+
           this.router.navigate(['dashboard']);
+          await this.data.getProfile();
         } else {
-         // this.data.error(data['message']);
-        
+          this.data.error(data['message']);
         }
       }
-    } catch (errorResponse) {
-     // this.data.error(error['message']);
-      this.errors = errorResponse.error.errors;
+    } catch (error) {
+      this.data.error(error['message']);
     }
+    this.btnDisabled = false;
   }
 }

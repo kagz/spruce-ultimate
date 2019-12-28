@@ -48,17 +48,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
-import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { MessageComponent } from './pages/helpers/message/message.component';
 
-import { ImageUploadService } from './services/imageupload.service';
 import { AuthGuard } from './services/auth.guard';
-import { RestApiService } from './services/auth.service';
+
 import { DataService } from './services/data.service';
 import { ResetComponent } from './pages/auth/reset/reset.component';
-import { ImageuploadComponent } from './pages/helpers/imageupload/imageupload.component';
+import { RestApiService } from './services/rest-api.service';
 
-@NgModule({  
+@NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -69,7 +68,7 @@ import { ImageuploadComponent } from './pages/helpers/imageupload/imageupload.co
     AddcompaniesComponent,
     AddstaffComponent,
     AddjobsComponent,
-      ViewPostedJobsComponent,
+    ViewPostedJobsComponent,
     ViewstaffsComponent,
     NotFoundComponent,
     ServerErrorComponent,
@@ -79,60 +78,48 @@ import { ImageuploadComponent } from './pages/helpers/imageupload/imageupload.co
     ViewClients,
     ImagecardComponent,
     FigurecardComponent,
-   
-
     UpdatejobComponent,
     BookedJobsComponent,
     EditstaffComponent,
- MessageComponent,
+    MessageComponent,
     SuccessPageComponent,
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
     HeaderComponent,
     ResetComponent,
-    ImageuploadComponent,
+  ],
 
-
-  ], 
-  
   imports: [
-   
+
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     BrowserModule,
- FlexLayoutModule,
- MatCardModule,
+    FlexLayoutModule,
+    MatCardModule,
     AppRoutingModule,
-    HttpClientModule
-    , ReactiveFormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     NgbModule,
     ImageCropperModule,
     ToastrModule.forRoot()
   ],
   providers: [
-   [ SettingsService,
-    Logger,
-    RestApiService,
-    AuthGuard,
-    DataService,
-    ImageUploadService
-    
+    [SettingsService,
+      Logger,
+      RestApiService,
+      AuthGuard,
+      DataService,
+    ],
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
-   {provide: LocationStrategy, useClass: HashLocationStrategy},
-  //  {
-  //   // provide: HTTP_INTERCEPTORS,
-  //   // // useClass: TokenInterceptor,
-  //   // multi: true
-  // }
-],
 
-entryComponents: [
-  SuccessPageComponent,
-  ErrorComponent
-],
+  entryComponents: [
+    SuccessPageComponent,
+    ErrorComponent
+  ],
 
   bootstrap: [AppComponent]
 })

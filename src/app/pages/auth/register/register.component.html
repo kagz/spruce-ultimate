@@ -59,9 +59,15 @@
                   <input type="password" matInput placeholder="Password"[(ngModel)]="password" name="password" />
                 </mat-form-field>
               </div>
-             
+              <div class="row">
+                <i class="material-icons">lock_outline</i>
+                <mat-form-field color="accent">
+                  <input type="password1" matInput placeholder="Confirm Password"[(ngModel)]="password1" name="password1" />
+                </mat-form-field>
+              </div>
               <div class="row" style="display: flex; justify-content: center">
                 <button
+                [disabled]="btnDisabled"
                  mat-raised-button 
                  class="btn btn-primary btn-round"
                   type="button"
@@ -79,7 +85,7 @@
           </div>
           <div *ngIf="errors.length > 0" class="alert alert-danger">
             <p *ngFor="let error of errors">
-              {{error.detail}}
+              {{data.message }
             </p>
           </div>
       </div>

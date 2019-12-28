@@ -10,15 +10,15 @@ export class ProfileComponent implements OnInit {
 
 
   public ownerForm: FormGroup;
- 
+
 
   constructor(private location: Location) { }
 
-  ngOnInit() {
+  ngOnInit () {
     this.ownerForm = new FormGroup({
-      jobname: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       dateOfStart: new FormControl(new Date()),
-     
+
       staffs: new FormControl('', [Validators.required, Validators.maxLength(100)])
       ,
       companyname: new FormControl('', [Validators.required, Validators.maxLength(100)]),

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,41 +21,33 @@ import { NotFoundComponent } from './pages/helpers/not-found/not-found.component
 import { ServerErrorComponent } from './pages/helpers/server-error/server-error.component';
 import { AuthGuard } from './services/auth.guard';
 
-
-
 const routes: Routes = [
- 
- 
-  { path: 'dashboard',
-   component: AdminLayoutComponent , 
-   canActivate: [AuthGuard],
-  
-  children: [
-    
-    {path: '', component: DashboardComponent},
-    { path: 'addcompanies', component: AddcompaniesComponent },
-  
-  { path: 'addjobs', component: AddjobsComponent },
-  { path: 'viewstaffs', component: ViewstaffsComponent },
-  { path: 'viewclients', component: ViewClients },
-  { path: 'viewjobs', component: ViewPostedJobsComponent },
-{path: 'bookedjobs',component:BookedJobsComponent},
-{ path: 'editprofile', component: ProfileComponent },
-{path: 'editcompany/:id', component: EditcompanyComponent },
-{path: 'editjob/:id', component: UpdatejobComponent },
-{path: 'editstaff/:id', component: EditstaffComponent },
-  ]},
+  {
+    path: 'dashboard',
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
+
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'addcompanies', component: AddcompaniesComponent },
+      { path: 'addjobs', component: AddjobsComponent },
+      { path: 'viewstaffs', component: ViewstaffsComponent },
+      { path: 'viewclients', component: ViewClients },
+      { path: 'viewjobs', component: ViewPostedJobsComponent },
+      { path: 'bookedjobs', component: BookedJobsComponent },
+      { path: 'editprofile', component: ProfileComponent },
+      { path: 'editcompany/:id', component: EditcompanyComponent },
+      { path: 'editjob/:id', component: UpdatejobComponent },
+      { path: 'editstaff/:id', component: EditstaffComponent },
+    ]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'forgetpassword', component: ForgetpasswordComponent },
-  { path: '404', component: NotFoundComponent}, 
+  { path: '404', component: NotFoundComponent },
   { path: '500', component: ServerErrorComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-
-
-  { path: '**', redirectTo: 'login', pathMatch: 'full'}
-
-
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 @NgModule({
   imports: [

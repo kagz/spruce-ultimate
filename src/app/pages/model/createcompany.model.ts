@@ -1,6 +1,6 @@
-import { Customer } from "./customer.model";
+import { Job } from "./job.model";
 
-export class Company{
+export class Company {
 
     _id: string;
     name: string;
@@ -8,8 +8,8 @@ export class Company{
     email: string;
     clientLocation: string;
     jobdesc: string;
-    customer:Customer[];
+    job: Job[];
     image: string;
-    
+
 
 }

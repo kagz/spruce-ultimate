@@ -5,7 +5,7 @@
       <app-header></app-header>
     </div>
    <div class="row">
-     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+     <div class="col-md-4 col-lg-3  col-sm-6 col-md-offset-4 col-sm-offset-3">
        <div class="card">
          <div class="card-header">
             <h4>Login</h4>
@@ -15,10 +15,10 @@
                 <a mat-mini-fab style="background-color: #3b5998;"><i class="fa fa-facebook"></i></a>
               </div>
          </div>
-         <div class="s-login-pg-foot">
+         <!-- <div class="s-login-pg-foot"> -->
       
-     
-        </div>
+          <app-message ></app-message>
+        <!-- </div> -->
 
          <form 
          (ngSubmit)="Login(loginForm.value)" 
@@ -43,9 +43,9 @@
          <div class="card-footer row"  >
          <div >
            <div style="margin: 10px">
-              <button mat-raised-button  class="btn btn-rose btn-round"  type="submit" [disabled]="btnDisabled" >   <i class="material-icons">lock</i> 
-                Login
-              </button> 
+            <button mat-raised-button  class="btn btn-rose btn-round"  type="submit" [disabled]="btnDisabled" >   <i class="material-icons">lock</i> 
+              Login
+            </button> 
            </div>
             
 

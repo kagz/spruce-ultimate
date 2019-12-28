@@ -7,17 +7,17 @@ declare const $: any;
   styleUrls: ['./addjobs.component.css']
 })
 export class AddjobsComponent implements OnInit, AfterViewInit {
- 
+
   jobname = '';
-  companyname='';
+  companyname = '';
   dateOfStart = '';
   staffs = '';
-  
+  jobdesc = ''
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit () {
 
   }
-  ngAfterViewInit() {
-}
+  ngAfterViewInit () {
+  }
 }

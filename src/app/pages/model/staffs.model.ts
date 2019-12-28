@@ -1,7 +1,8 @@
-export interface Staffs{
+export interface Staffs {
     _id: string;
     name: string;
-    dateOfBirth: Date;
+    email: string;
     address: string;
+    phone: string;
 
 }
