@@ -11,7 +11,7 @@ import { RestApiService } from 'app/services/rest-api.service';
 })
 export class ForgetpasswordComponent implements OnInit {
 
-  email = 'kagwiandrew@gmail.com';
+  email = '';
   errors: any[] = [];
   constructor(
     private router: Router,
@@ -25,7 +25,7 @@ export class ForgetpasswordComponent implements OnInit {
     try {
 
       const data = await this.rest.post(
-        'http://localhost:3030/forgot',
+        'https://sprucemvp-api.herokuapp.com/forgot',
         {
 
           email: this.email,
