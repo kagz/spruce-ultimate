@@ -12,12 +12,12 @@ declare const $: any;
 export class AddjobsComponent implements OnInit, AfterViewInit {
 
   newJob = {
-    jobname: 'ukamagera',
+    jobname: '',
     companyname: '',
     dateOfStart: '',
-    staffs: '20',
-    jobdesc: 'a very long job description',
-    clientlocation: 'kayoree'
+    staffs: '',
+    jobdesc: '',
+    clientlocation: ''
   }
 
   constructor(

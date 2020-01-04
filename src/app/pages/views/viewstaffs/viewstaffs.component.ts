@@ -55,7 +55,7 @@ export class ViewstaffsComponent implements OnInit {
       this.data.error(error['message']);
     }
 
-
+    this.dataSource.data = this.ourstaffs;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

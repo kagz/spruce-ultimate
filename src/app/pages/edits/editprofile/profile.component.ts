@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { DataService } from 'app/services/data.service';
+import { RestApiService } from 'app/services/rest-api.service';
+import { Logger } from 'app/services/logger.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -8,13 +11,17 @@ import { Location } from '@angular/common';
 })
 export class ProfileComponent implements OnInit {
 
-
   public ownerForm: FormGroup;
 
+  constructor(
+    private data: DataService,
 
-  constructor(private location: Location) { }
+    private logger: Logger,
 
-  ngOnInit () {
+
+    private location: Location) { }
+
+  async ngOnInit () {
     this.ownerForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       dateOfStart: new FormControl(new Date()),
@@ -24,6 +31,8 @@ export class ProfileComponent implements OnInit {
       companyname: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       location: new FormControl('', [Validators.required, Validators.maxLength(100)])
     });
+
+
   }
 
   public hasError = (controlName: string, errorName: string) => {

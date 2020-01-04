@@ -7,17 +7,31 @@
             <i class="material-icons">perm_identity</i>
 
           </div>
-         
-             <div class="right-profile">
+          <div *ngIf="!data.user"  class="m-auto">
+            <h1 class="text-center display-3 mt-5">
+              <i class="fa fa-spinner fa-spin"></i>
+              <div>
+                looking for profile!!
+              </div>
+            </h1>
+          </div>
+             <div *ngIf="data.user"  class="right-profile">
               <div class="profile">
-                <img src="../../../assets/img/marc.jpg" alt="profile"/>
+                <img [src]="data.user.picture"  alt="profile"/>
               </div>
              
             </div>
           <div class="card-content;col-sd-12 " style="padding: 50px">
-            <h4 class="card-title" style="margin-top: 20px">Edit Profile 
+
+           
+
+            <h4 *ngIf="data.user"  class="card-title" style="margin-top: 20px">{{ data.user.name }}
              
             </h4>
+
+         
+           
+
             <form  [formGroup]="ownerForm">
               <div class="row">
                 <div class="col-md-6">

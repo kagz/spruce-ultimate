@@ -9,6 +9,17 @@
             
               <div class="card-content">
                 <h4 class="card-title">Our Clients</h4>
+
+                <div class="row" style="margin-top: 10px">
+                  <div *ngIf="!ourclients" class="m-auto">
+                    <h1 class="text-center display-3 mt-5">
+                      <i class="fa fa-spinner fa-spin"></i>
+                      <div>
+                        looking for clients!!
+                      </div>
+                    </h1>
+                  </div>
+
                 <div class="table-responsive">
                  
       

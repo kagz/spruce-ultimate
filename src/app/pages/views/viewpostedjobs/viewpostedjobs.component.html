@@ -7,7 +7,18 @@
           <i class="material-icons">assignment</i>
         </div>
         <div class="card-content">
-          <h4 class="card-title">View Posted Jobs</h4>
+          <h4 class="card-title">View Posted jobs</h4>
+          <div *ngIf="!jobs" class="m-auto">
+            <h1 class="text-center display-3 mt-5">
+              <i class="fa fa-spinner fa-spin"></i>
+              <div>
+                looking for our jobs!!
+              </div>
+            </h1>
+          </div>
+
+
+
           <div class="table-responsive">
            
 
@@ -20,28 +31,25 @@
             <table mat-table [dataSource]="dataSource" matSort>
               <ng-container matColumnDef="jobname">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Job Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                <td mat-cell *matCellDef="let jobs"> {{jobs.name}} </td>
               </ng-container>
             
               <ng-container matColumnDef="clientname">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Client Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.clientname}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Client Place </th>
+                <td mat-cell *matCellDef="let jobs"> {{jobs.clientlocation}} </td>
               </ng-container>
-              <ng-container matColumnDef="staffsnumber">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Working Staffs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.staffsnumber}} </td>
-                </ng-container>
+
               <ng-container matColumnDef="startdate">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
-                <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date}} </td>
+                <td mat-cell *matCellDef="let jobs"> {{jobs.dateOfStart | date :'short'}} </td>
               </ng-container>
             
            
             
               <ng-container matColumnDef="editjob" style="padding: 15px">
                   <th mat-header-cell *matHeaderCellDef> Edit Job </th>
-                  <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button color="accent" (click)="redirectToEditJob(element.id)">
+                  <td mat-cell *matCellDef="let jobs">
+                    <button mat-icon-button color="accent" (click)="redirectToEditJob(jobs.id)">
                         <mat-icon class="mat-18">system_update</mat-icon>
                     </button>
                   </td>
