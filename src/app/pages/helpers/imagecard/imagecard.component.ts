@@ -8,12 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ImagecardComponent implements OnInit {
   @Input() title: string;
   @Input() desc: string;
-  @Input() footerTitle: string;
+  @Input() footerTitle: Number;
   @Input() place: string;
   @Input() image: string;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
 }

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   email = 'kagwiandrew@gmail.com';
   password = '123456';
-  errors: any[] = [];
+  errors = '';
   btnDisabled = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -28,8 +28,9 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-
+    this.data.logout();
   }
+
   validate () {
     if (this.email) {
       if (this.password) {
@@ -58,13 +59,15 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data['token']);
 
           this.router.navigate(['dashboard']);
-          await this.data.getProfile();
+          // 
         } else {
-          this.data.error(data['message']);
+          this.data.error('An error occured try again');
         }
       }
     } catch (error) {
-      this.data.error(error['message']);
+      // this.data.error('wrong user details or account blocked');
+      this.errors = ('wrong user details or account blocked');
+      console.log(error)
     }
     this.btnDisabled = false;
   }

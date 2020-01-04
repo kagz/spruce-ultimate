@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Staffs } from 'app/pages/model/staffs.model';
 import { Logger } from 'app/services/logger.service';
+import { DataService } from 'app/services/data.service';
+import { RestApiService } from 'app/services/rest-api.service';
 
 @Component({
   selector: 'app-viewstaffs',
@@ -10,21 +12,26 @@ import { Logger } from 'app/services/logger.service';
 })
 export class ViewstaffsComponent implements OnInit {
 
-  public displayedColumns = ['name', 'contacts', 'identity', 'edit'];
-  public dataSource = new MatTableDataSource<Staffs>(); 
+  public displayedColumns = ['name', 'contacts', 'email', 'edit'];
+  public dataSource = new MatTableDataSource<Staffs>();
   screenHeight: any;
   screenWidth: any;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @HostListener('window:resize', ['$event'])
-  onResize(event?) {
-  this.screenHeight = window.innerHeight;
-  this.screenWidth = window.innerWidth;
- this.logger.log(`Resize() height: ${this.screenHeight}; width: ${this.screenWidth}`);
-  this.setDisplayedColumns();
-}
+  onResize (event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    this.logger.log(`Resize() height: ${this.screenHeight}; width: ${this.screenWidth}`);
+    this.setDisplayedColumns();
+  }
+  ourstaffs: any;
+  constructor(
 
-  constructor(private logger: Logger) { 
+    private data: DataService,
+    private rest: RestApiService,
+
+    private logger: Logger) {
 
     this.screenHeight = window.screen.height;
     this.screenWidth = window.screen.width;
@@ -33,21 +40,36 @@ export class ViewstaffsComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit () {
+
+
+    try {
+      const data = await this.rest.get(
+        'https://sprucemvp-api.herokuapp.com/users'
+      );
+      data
+        ? (this.ourstaffs = data['docs'])
+        : this.data.error(data['message']);
+      console.log(this.ourstaffs)
+    } catch (error) {
+      this.data.error(error['message']);
+    }
+
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  applyFilter(filterValue: string) {
+  applyFilter (filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-}    setDisplayedColumns() {
-  if (this.screenWidth < 420) {
-      this.displayedColumns = ['name', 'contacts', 'identity', 'edit'];
+  } setDisplayedColumns () {
+    if (this.screenWidth < 420) {
+      this.displayedColumns = ['name', 'contacts', 'email', 'edit'];
+    }
+    else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
+      this.displayedColumns = ['name', 'contacts', 'email', 'edit'];
+    }
+    else {
+      this.displayedColumns = ['name', 'contacts', 'email', 'edit'];
+    }
   }
-  else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
-      this.displayedColumns =['name', 'contacts', 'identity', 'edit'];
-  }
-  else {
-      this.displayedColumns = ['name', 'contacts', 'identity', 'edit'];
-  }
-}
 }

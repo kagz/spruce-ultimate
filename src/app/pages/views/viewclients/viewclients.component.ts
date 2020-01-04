@@ -13,7 +13,7 @@ import { RestApiService } from 'app/services/rest-api.service';
   styleUrls: ['./viewclients.component.css']
 })
 export class ViewClients implements OnInit {
-  public displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
+  public displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
   public dataSource = new MatTableDataSource<Company>();
   screenHeight: any;
   screenWidth: any;
@@ -46,7 +46,7 @@ export class ViewClients implements OnInit {
 
     try {
       const data = await this.rest.get(
-        'http://localhost:3030/company/all'
+        'https://sprucemvp-api.herokuapp.com/company/all'
       );
       data
         ? (this.ourclients = data)
@@ -61,17 +61,17 @@ export class ViewClients implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.data = this.ourclients;
   }
-  applyFilter (filterValue: string) {
+  doFilter (filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   } setDisplayedColumns () {
     if (this.screenWidth < 420) {
-      this.displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
+      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
     }
     else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
-      this.displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
+      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
     }
     else {
-      this.displayedColumns = ['clientname', 'contacts', 'email', 'location', 'edit'];
+      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
     }
   }
 }

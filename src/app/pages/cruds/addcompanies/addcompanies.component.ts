@@ -4,7 +4,7 @@ import { DataService } from 'app/services/data.service';
 
 import { Router } from '@angular/router';
 import { Company } from 'app/pages/model/createcompany.model';
-import { HttpErrorResponse } from '@angular/common/http';
+
 import { RestApiService } from 'app/services/rest-api.service';
 
 @Component({
@@ -14,23 +14,17 @@ import { RestApiService } from 'app/services/rest-api.service';
 })
 export class AddcompaniesComponent implements OnInit {
 
-  cities: any
-
-  newCompany: Company;
-
-  errors: any[] = [];
-
-  ngAfterViewInit (): void {
-
-  }
-
-  handleImageChange () {
-    this.newCompany.image = "";
-  }
-
-
-
+  newCompany = {
+    name: '',
+    clientlocation: '',
+    picture: '',
+    phone: '',
+    email: '',
+    photo: ''
+  };
   btnDisabled = false;
+  //name,clientlocation,picture,phone,email
+
 
   constructor(
     private data: DataService,
@@ -38,58 +32,72 @@ export class AddcompaniesComponent implements OnInit {
     private router: Router
   ) { }
 
-  async ngOnInit () {
-    this.newCompany = new Company();
-    this.allCities();
+  ngAfterViewInit (): void {
 
   }
 
-  async allCities () {
-    this.cities = [];
 
-    try {
-      const data = await this.rest.get(
-        'http://localhost:3030/cities/all'
-      );
+  validate (newCompany) {
+    if (newCompany.name) {
+      if (newCompany.clientlocation) {
+        if (newCompany.email) {
+          if (newCompany.phone) {
 
-      data
-        ? (this.cities = data)
-        : this.data.error(data['message']);
-    } catch (error) {
-      this.data.error(error['message']);
+            return true;
+
+          } else {
+            this.data.error('Please enter name.');
+          }
+        } else {
+          this.data.error('Please enter email.');
+        }
+      } else {
+        this.data.error('Please enter a location.');
+      }
+    } else {
+      this.data.error('Please enter a phone.');
     }
+  }
+
+
+  async ngOnInit () {
 
 
   }
 
-  handleImageUpload (imageUrl: string) {
-    this.newCompany.image = imageUrl;
-  }
-
-  handleImageError () {
-    this.newCompany.image = '';
-  }
 
   async addCompany () {
 
-    this.btnDisabled = true;
-    try {
+    if (this.validate(this.newCompany)) {
 
-      const form = new FormData();
+      try {
+        let profileData = {
+          name: this.newCompany.name,
+          phone: this.newCompany.phone,
+          clientlocation: this.newCompany.clientlocation,
+          email: this.newCompany.email,
 
-      const data = await this.rest.post(
-        'http://localhost:3030/addcompany',
-        form
-      );
-      data['success']
-        ? this.router.navigate(['/dashboard'])
-          .then(() => this.data.success(data['message']))
-          .catch(error => this.data.error(error))
-        : this.data.error(data['message']);
+        }
+        const data = this.rest.post(
+          'https://sprucemvp-api.herokuapp.com/company',
+          profileData
+        );
+        data
+          ? this.data.success('record saved succesfully')
+          //.catch(error => this.data.error("an error occured check if company exists"))
+          : this.data.error("an error occured check if company exists or call admin");
+        this.router.navigate(['/dashboard'])
 
-    } catch (error) {
-      this.data.error(error['message']);
+      } catch (err) {
+        console.log(err)
+      }
+
+      // console.log(resp.data);
     }
-    this.btnDisabled = false;
+
+
+
+
+
   }
 }

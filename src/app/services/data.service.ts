@@ -10,7 +10,7 @@ export class DataService {
   messageType = 'danger';
 
   user: any;
-  cartItems = 0;
+
 
   constructor(private router: Router, private rest: RestApiService) {
     this.router.events.subscribe(event => {
@@ -39,17 +39,17 @@ export class DataService {
     try {
       if (localStorage.getItem('token')) {
         const data = await this.rest.get(
-          'http://localhost:3030/profile',
+          'https://sprucemvp-api.herokuapp.com/profile',
         );
-        this.user = data['user'];
-        console.log(this.user);
+        this.user = data;
+        console.log(data)
       }
     } catch (e) {
-      this.error(e);
+      this.error('failed to load data!! login first');
     }
   }
+  logout () {
 
-}
-export class DataUrl {
-  END_POINT = 'http://localhost:3030'
+    localStorage.setItem('token', '[]');
+  }
 }

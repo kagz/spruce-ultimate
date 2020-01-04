@@ -16,8 +16,12 @@
               </div>
          </div>
          <!-- <div class="s-login-pg-foot"> -->
-      
-          <app-message ></app-message>
+          <div *ngIf="errors.length > 0" class="alert alert-danger">
+            <p >
+              {{errors}}
+            </p>
+          </div>
+          <!-- <app-message ></app-message> -->
         <!-- </div> -->
 
          <form 
@@ -70,11 +74,7 @@
 
            </div>
           </form>
-          <div *ngIf="errors.length > 0" class="alert alert-danger">
-            <p *ngFor="let error of errors">
-              {{error.detail}}
-            </p>
-          </div>
+     
       </div>
      </div>
    </div>

@@ -13,12 +13,10 @@ import { RestApiService } from 'app/services/rest-api.service';
 export class RegisterComponent implements OnInit {
 
 
-  email = 'kagwiandrew@gmail.com';
-  name = 'kamagera mwenyewe';
+  email = 'ray@gmail.com';
+  name = 'Ryan mwenyewe';
   password = '';
-  password1 = '';
-  errors: any[] = [];
-
+  phone = '123456';
   btnDisabled = false;
 
   constructor(
@@ -28,24 +26,19 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit () {
-
+    this.data.logout();
 
   }
 
   validate () {
     if (this.name) {
       if (this.email) {
-        if (this.password) {
-          if (this.password1) {
-            if (this.password === null) {
-              return true;
-            } else {
-              this.data.error('Passwords do not match.');
-            }
-          } else {
-            this.data.error('Confirmation Password is not entered');
-          }
-        } else {
+
+        if (this.password)
+          // if (this.phone)
+          return true;
+
+        else {
           this.data.error('Password is not entered');
         }
       } else {
@@ -61,24 +54,27 @@ export class RegisterComponent implements OnInit {
     try {
       if (this.validate()) {
         const data = await this.rest.post(
-          'http://localhost:3030/signup',
+          'https://sprucemvp-api.herokuapp.com/register',
           {
             name: this.name,
             email: this.email,
             password: this.password,
-            // isSeller: this.isSeller,
+            phone: this.phone,
           },
         );
+
         if (data) {
-          localStorage.setItem('token', data['token']['user']);
-          // await this.data.getProfile();
-          this.data.success('Registration successful!');
+          localStorage.setItem('token', data['token']);
+          //await this.data.getProfile();
+          this.router.navigate(['dashboard']);
         } else {
-          this.data.error(data['message']);
+          this.data.error('Profile loading Failed!');
         }
       }
     } catch (error) {
-      this.data.error(error['message']);
+      console.log(error)
+      this.data.error('Registration Failed! check credentials');
+
     }
     this.btnDisabled = false;
   }
