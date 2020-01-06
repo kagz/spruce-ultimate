@@ -17,8 +17,7 @@ import { EditstaffComponent } from './pages/edits/editstaff/editstaff.component'
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgetpasswordComponent } from './pages/auth/forgetpassword/forgetpassword.component';
-import { NotFoundComponent } from './pages/helpers/not-found/not-found.component';
-import { ServerErrorComponent } from './pages/helpers/server-error/server-error.component';
+
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
@@ -43,8 +42,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'forgetpassword', component: ForgetpasswordComponent },
-  { path: '404', component: NotFoundComponent },
-  { path: '500', component: ServerErrorComponent },
+
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];

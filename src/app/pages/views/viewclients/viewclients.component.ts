@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 
 import { Logger } from 'app/services/logger.service';
 import { DataService } from 'app/services/data.service';
@@ -17,6 +17,8 @@ export class ViewClients implements OnInit {
   public dataSource = new MatTableDataSource<Company>();
   screenHeight: any;
   screenWidth: any;
+  index: number;
+  id: number;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @HostListener('window:resize', ['$event'])
@@ -30,6 +32,7 @@ export class ViewClients implements OnInit {
   ourclients: any;
 
   constructor(
+    public dialog: MatDialog,
     private logger: Logger,
     private data: DataService,
     private rest: RestApiService) {
@@ -74,4 +77,6 @@ export class ViewClients implements OnInit {
       this.displayedColumns = ['clientname', 'contacts', 'location', 'edit', 'delete'];
     }
   }
+
+
 }

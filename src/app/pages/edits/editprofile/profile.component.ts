@@ -10,36 +10,77 @@ import { Logger } from 'app/services/logger.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  public ownerForm: FormGroup;
+  currentSettings: any;
+  name: ''
 
   constructor(
     public data: DataService,
-
-    private logger: Logger,
-
-
-    private location: Location) { }
+    private rest: RestApiService,
+  ) { }
 
   async ngOnInit () {
-    this.ownerForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      dateOfStart: new FormControl(new Date()),
-
-      staffs: new FormControl('', [Validators.required, Validators.maxLength(100)])
-      ,
-      companyname: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      location: new FormControl('', [Validators.required, Validators.maxLength(100)])
-    });
-
-
+    try {
+      if (!this.data.user) {
+        await this.data.getProfile();
+      }
+      this.currentSettings = Object.assign({
+        newPassword: '',
+        confirmPassword: ''
+      }, this.data.user);
+    } catch (error) {
+      this.data.error(error);
+    }
   }
 
-  public hasError = (controlName: string, errorName: string) => {
-    return this.ownerForm.controls[controlName].hasError(errorName);
+  validate (settings) {
+    if (settings['name']) {
+      if (settings['email']) {
+        if (settings['newPassword']) {
+          if (settings['confirmPassword']) {
+            if (settings['newPassword'] === settings['confirmPassword']) {
+              return true;
+            } else {
+              this.data.error('Passwords do not match.');
+            }
+          } else {
+            this.data.error('Please enter confirmation password.');
+          }
+        } else {
+          if (!settings['confirmPassword']) {
+            return true;
+          } else {
+            this.data.error('Please enter new password.');
+          }
+        }
+      } else {
+        this.data.error('Please enter your email.');
+      }
+    } else {
+      this.data.error('Please enter your name.');
+    }
   }
 
-  public onCancel = () => {
-    this.location.back();
+  async update () {
+
+    try {
+      if (this.currentSettings) {
+        const data = await this.rest.post(
+          'https://sprucemvp-api.herokuapp.com/profile/changePassword',
+          {
+
+            oldPassword: this.currentSettings['oldpassword'],
+            newPassword: this.currentSettings['newpassword'],
+
+          }
+        );
+
+        data
+          ? (this.data.getProfile(), this.data.success(data))
+          : this.data.error(data);
+      }
+    } catch (error) {
+      this.data.error(error);
+    }
+
   }
 }

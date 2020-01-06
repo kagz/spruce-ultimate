@@ -25,44 +25,48 @@
 
            
 
-            <h4 *ngIf="data.user"id="name" class="lead"   style="margin-top: 20px">{{ data.user.name }}
+            <h4 *ngIf="data.user"id="name" class="lead"   style="margin-top: 20px">Change Your Password
              
             </h4>
 
          
            
 
-            <form  [formGroup]="ownerForm">
+            <form  >
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                    <input matInput type="text" placeholder=" Name"   name="firstName">
+                    <input matInput type="text" placeholder=" Name"   name="name"  [(ngModel)]="data.user.name">
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                    <input matInput type="text" placeholder="Phone" name="phone">
+                    <input matInput type="text" placeholder="Phone" name="phone"[(ngModel)]="data.user.phone">
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field color="accent">
-                    <input matInput type="text" placeholder="Identiy / passport">
-                  </mat-form-field>
-                </div>
-  <div class="col-md-6">
-                  <mat-form-field color="accent">
-                    <input matInput type="email" placeholder="Email">
-                  </mat-form-field>
-                </div>
-
               </div>
               <div class="row">
               
+  <div class="col-md-6">
+                  <mat-form-field color="accent">
+                    <input matInput type="email" placeholder="Email" name="email" [(ngModel)]="data.user.email">
+                  </mat-form-field>
+                </div>
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                    <input matInput type="password" placeholder="Password">
+                    <input matInput type="password"name="currentSettings.oldpassword" placeholder="Old Password">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field color="accent">
+                    <input matInput type="password"name="currentSettings.newpassword" placeholder="New Password">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field color="accent">
+                    <input matInput type="password"name="confirmPassword" placeholder="Confirm Password">
                   </mat-form-field>
                 </div>
              
@@ -70,12 +74,12 @@
               <div class="row">
               </div>
               <div class="row action-btn">
-                <button md-raised-button type="submit" class="btn btn-rose">UPDATE </button>
+                <button md-raised-button (click)="update()" class="btn btn-rose">UPDATE </button>
               </div>
             </form>
           </div>
         </div>
-      </div>s
+      </div>
  
     </div>
   </div>

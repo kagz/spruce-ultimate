@@ -61,7 +61,8 @@
                         <ng-container matColumnDef="delete" style="padding: 15px">
                           <th mat-header-cell *matHeaderCellDef> Delete client </th>
                           <td mat-cell *matCellDef="let ourclients">
-                            <button mat-icon-button color="warn" (click)="redirectToEditCompany(ourclients.id)">
+                            <input hidden="hidden" name="id" />
+                            <button mat-icon-button color="warn" (click)="openDialog(ourclients._id)" >
                                 <mat-icon class="mat-18">delete</mat-icon>
                             </button>
                           </td>

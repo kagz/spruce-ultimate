@@ -13,10 +13,10 @@ import { RestApiService } from 'app/services/rest-api.service';
 export class RegisterComponent implements OnInit {
 
 
-  email = 'ray@gmail.com';
-  name = 'Ryan mwenyewe';
+  email = '';
+  name = '';
   password = '';
-  phone = '123456';
+  phone = '';
   btnDisabled = false;
 
   constructor(

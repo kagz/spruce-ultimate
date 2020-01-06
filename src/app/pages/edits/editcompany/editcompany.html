@@ -1,72 +1,68 @@
-<div class="container">
+<section id="company">
+  <div class="container">
     <app-navbar title="User Profile"></app-navbar>
     <div class="row" style="margin-top: 30px" fxLayoutAlign="center ">
-      <div class="col-md-8">
+      <div class="col-md-9">
         <div class="card">
           <div class="card-header">
             <i class="material-icons">perm_identity</i>
-
           </div>
-         
-             <div class="right-profile">
-              <div class="profile">
-                <img src="../../../assets/img/marc.jpg" alt="profile"/>
-              </div>
-             
+          <div class="right-profile">
+            <div class="profile">
+              <img src="https://cdn2.iconfinder.com/data/icons/flat-business-icon/600/shares-company-finance-512.png" alt="profile" />
             </div>
+          </div>
           <div class="card-content;col-sd-12 " style="padding: 50px">
-            <h4 class="card-title" style="margin-top: 20px">Edit Client
-             
-            </h4>
-            <form  [formGroup]="ownerForm">
+            <h5 class="card-title" style="margin-top: 10px">New Client
+            </h5>
+            <form autocomplete="off" fxLayout="column wrap" fxLayoutAlign="center center"
+              fxLayoutGap="10px">
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                    <input matInput type="text" placeholder="Client Name"   name="clientname">
+                    <input matInput type="text" placeholder="Client's name" id="name" name="name"
+                      [(ngModel)]="company.name" required>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                    <input matInput type="text" placeholder="Location" name="Location">
+                    <input matInput type="text" placeholder="clientlocation" name="clientlocation" [(ngModel)]="company.clientlocation" required>
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-md-6">
                   <mat-form-field color="accent">
-                    <input matInput type="text" placeholder="Client Contact">
-                  </mat-form-field>
-                </div>
-  <div class="col-md-6">
-                  <mat-form-field color="accent">
-                    <input matInput type="text" placeholder="Email">
+                    <input matInput type="text" placeholder="Phone" name="phone" [(ngModel)]="company.phone" required>
                   </mat-form-field>
                 </div>
 
+   <div class="col-md-6">
+                  <mat-form-field color="accent">
+                    <input matInput type="email" placeholder="Client's Email" required name="email"
+                      [(ngModel)]="company.email">
+                  </mat-form-field>
+                </div>
+
+
               </div>
-         
            
-         
-              <div class="col-md-6">
-                  <mat-form-field color="accent">
-                      <textarea matInput type="text" placeholder="Jobs type description" formControlName="jobdesc"></textarea>
-                    </mat-form-field>
+             
+              <div class="row ">
+                <div style="padding: 5px">
+                  <button 
+                  mat-raised-button 
+                  color="primary" 
+                  (click)="updateCompany()" [disabled]="btnDisabled"
+                  >Create</button>
                 </div>
-
-
-
-              <div class="row action-btn">
-                <button md-raised-button type="submit" class="btn btn-rose">UPDATE </button>
+                <!-- <div style="padding: 5px">
+                  <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+                </div> -->
               </div>
-            
-              <div class="row action-btn">
-                    <button md-raised-button type="submit" class="btn btn-rose">DELETE </button>
-                  </div>
             </form>
           </div>
+          <app-message></app-message>
         </div>
       </div>
- 
     </div>
   </div>
-  
+</section>
