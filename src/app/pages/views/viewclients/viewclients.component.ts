@@ -13,7 +13,7 @@ import { RestApiService } from 'app/services/rest-api.service';
   styleUrls: ['./viewclients.component.css']
 })
 export class ViewClients implements OnInit {
-  public displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
+  public displayedColumns = ['clientname', 'contacts', 'location', 'edit', 'delete'];
   public dataSource = new MatTableDataSource<Company>();
   screenHeight: any;
   screenWidth: any;
@@ -65,13 +65,13 @@ export class ViewClients implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   } setDisplayedColumns () {
     if (this.screenWidth < 420) {
-      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
+      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit', 'delete'];
     }
     else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
-      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
+      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit', 'delete'];
     }
     else {
-      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit'];
+      this.displayedColumns = ['clientname', 'contacts', 'location', 'edit', 'delete'];
     }
   }
 }

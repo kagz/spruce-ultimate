@@ -12,7 +12,7 @@ import { RestApiService } from 'app/services/rest-api.service';
 })
 export class ViewstaffsComponent implements OnInit {
 
-  public displayedColumns = ['name', 'contacts', 'email', 'edit'];
+  public displayedColumns = ['name', 'contacts', 'email', 'edit', 'delete'];
   public dataSource = new MatTableDataSource<Staffs>();
   screenHeight: any;
   screenWidth: any;
@@ -63,13 +63,13 @@ export class ViewstaffsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   } setDisplayedColumns () {
     if (this.screenWidth < 420) {
-      this.displayedColumns = ['name', 'contacts', 'email', 'edit'];
+      this.displayedColumns = ['name', 'contacts', 'email', 'edit', 'delete'];
     }
     else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
-      this.displayedColumns = ['name', 'contacts', 'email', 'edit'];
+      this.displayedColumns = ['name', 'contacts', 'email', 'edit', 'delete'];
     }
     else {
-      this.displayedColumns = ['name', 'contacts', 'email', 'edit'];
+      this.displayedColumns = ['name', 'contacts', 'email', 'edit', 'delete'];
     }
   }
 }

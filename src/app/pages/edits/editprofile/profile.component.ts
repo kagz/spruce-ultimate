@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   public ownerForm: FormGroup;
 
   constructor(
-    private data: DataService,
+    public data: DataService,
 
     private logger: Logger,
 

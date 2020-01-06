@@ -12,7 +12,7 @@ import { DataService } from 'app/services/data.service';
   styleUrls: ['./viewpostedjobs.component.css']
 })
 export class ViewPostedJobsComponent implements OnInit {
-  public displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob'];
+  public displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob', 'delete'];
   public dataSource = new MatTableDataSource<Job>();
   screenHeight: any;
   screenWidth: any;
@@ -64,13 +64,13 @@ export class ViewPostedJobsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   } setDisplayedColumns () {
     if (this.screenWidth < 420) {
-      this.displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob'];
+      this.displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob', 'delete'];
     }
     else if (this.screenWidth >= 420 && this.screenWidth <= 800) {
-      this.displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob'];
+      this.displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob', 'delete'];
     }
     else {
-      this.displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob'];
+      this.displayedColumns = ['jobname', 'clientname', 'startdate', 'editjob', 'delete'];
     }
   }
 }

@@ -19,7 +19,7 @@
              
             </h5>
 
-            <form  [formGroup]="newJobsForm" autocomplete="off" novalidate (ngSubmit)="addJobs(newJobsForm.value)" fxLayout="column wrap"
+            <form  [formGroup]="newJobsForm" autocomplete="off" novalidate  fxLayout="column wrap"
             fxLayoutAlign="center center" fxLayoutGap="10px">
               <div class="row">
                 <div class="col-md-6">
@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                   <mat-form-field color="accent">
                       <mat-select placeholder="Client Name" formControlName="companyname" required>
-                          <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">
+                          <mat-option >
                             
                           </mat-option>
                         </mat-select>
@@ -59,7 +59,7 @@
 
                  </div>
                  <div style="padding: 10px">
-                  <button type="button" mat-raised-button color="warn" (click)="onCancel()">Delete</button>
+                  <button type="button" mat-raised-button color="warn">Delete</button>
 
                  </div>
               </div>

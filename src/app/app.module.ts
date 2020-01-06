@@ -49,13 +49,13 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { ToastrModule } from 'ngx-toastr';
-import { MessageComponent } from './pages/helpers/message/message.component';
 
 import { AuthGuard } from './services/auth.guard';
 
 import { DataService } from './services/data.service';
 import { ResetComponent } from './pages/auth/reset/reset.component';
 import { RestApiService } from './services/rest-api.service';
+import { MessageComponent } from './pages/helpers/message/message.component';
 
 @NgModule({
   declarations: [

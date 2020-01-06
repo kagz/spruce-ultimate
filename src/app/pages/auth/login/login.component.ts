@@ -12,8 +12,8 @@ import { RestApiService } from 'app/services/rest-api.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  email = 'kagwiandrew@gmail.com';
-  password = '123456';
+  email = '';
+  password = '';
   errors = '';
   btnDisabled = false;
   constructor(

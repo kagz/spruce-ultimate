@@ -8,11 +8,11 @@ import { DataService } from 'app/services/data.service';
 })
 export class MessageComponent implements OnInit {
 
-  constructor(private data:DataService) { 
-    
+  constructor(public data: DataService) {
+
   }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
 }
